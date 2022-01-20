@@ -1,10 +1,9 @@
-const PORT = Process.env.PORT || 8000
+const PORT = process.env.PORT || 8000
 const express = require('express')
 const axios = require('axios')
 const cheerio = require('cheerio')
+const app = express()
 
-
-const articles = []
 const newspapers = [
     {
         name: 'cityam',
@@ -72,8 +71,8 @@ const newspapers = [
         base: ''
     }
 ]
-const app = express()
 
+const articles = []
 
 newspapers.forEach(newspaper => {
     axios.get(newspaper.address)
@@ -128,6 +127,5 @@ app.get('/news/:newspaperId', (req, res) => {
             res.json(specificArticles)
         }).catch(err => console.log(err))
 })
-app.listen(PORT , ()=>console.log(`Server running on PORT ${PORT}`))
 
-
+app.listen(PORT, () => console.log(`server running on PORT ${PORT}`))
